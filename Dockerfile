@@ -1,4 +1,4 @@
-FROM golang:1.21.0
+FROM golang:1.22.0
 
 WORKDIR /final-app
 
@@ -8,6 +8,8 @@ RUN go mod download
 
 COPY *.go ./
 
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /final
+ENV CGO_ENABLED=0 GOOS=linux GOARCH=amd64
+
+RUN go build -o /final
 
 CMD ["/final"]
